@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineReview - Rate & Review Movies, Anime, Manga & More</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-film"></i>
+                <h1>CineReview</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-toggle" id="navToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#add-review">Add Review</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Rate & Review Your Favorite Content</h2>
+            <p>Movies, Anime, Manga, Cartoons, Films & More!</p>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for movies, anime, manga..." class="search-input">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div class="trending-tags">
+                <span>Trending:</span>
+                <button class="tag-btn" data-search="anime">Anime</button>
+                <button class="tag-btn" data-search="marvel">Marvel</button>
+                <button class="tag-btn" data-search="manga">Manga</button>
+                <button class="tag-btn" data-search="cartoon">Cartoons</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Browse by Category</h2>
+            <div class="category-grid">
+                <button class="category-card" data-category="all">
+                    <i class="fas fa-globe"></i>
+                    <span>All</span>
+                </button>
+                <button class="category-card" data-category="movie">
+                    <i class="fas fa-film"></i>
+                    <span>Movies</span>
+                </button>
+                <button class="category-card" data-category="anime">
+                    <i class="fas fa-dragon"></i>
+                    <span>Anime</span>
+                </button>
+                <button class="category-card" data-category="manga">
+                    <i class="fas fa-book"></i>
+                    <span>Manga</span>
+                </button>
+                <button class="category-card" data-category="cartoon">
+                    <i class="fas fa-tv"></i>
+                    <span>Cartoons</span>
+                </button>
+                <button class="category-card" data-category="series">
+                    <i class="fas fa-video"></i>
+                    <span>Series</span>
+                </button>
+                <button class="category-card" data-category="documentary">
+                    <i class="fas fa-file-video"></i>
+                    <span>Documentary</span>
+                </button>
+                <button class="category-card" data-category="other">
+                    <i class="fas fa-star"></i>
+                    <span>Other</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Review Section -->
+    <section class="add-review" id="add-review">
+        <div class="container">
+            <h2 class="section-title">Write a Review</h2>
+            <form class="review-form" id="reviewForm">
+                <div class="form-group">
+                    <label for="title">Title *</label>
+                    <input type="text" id="title" required placeholder="Enter movie/anime title">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="category">Category *</label>
+                        <select id="category" required>
+                            <option value="">Select category</option>
+                            <option value="movie">Movie</option>
+                            <option value="anime">Anime</option>
+                            <option value="manga">Manga</option>
+                            <option value="cartoon">Cartoon</option>
+                            <option value="series">Series</option>
+                            <option value="documentary">Documentary</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="genre">Genre</label>
+                        <input type="text" id="genre" placeholder="e.g., Action, Comedy">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Movie Poster</label>
+                    <div class="image-upload-container">
+                        <div class="upload-options">
+                            <label class="upload-tab active" for="urlTab">
+                                <i class="fas fa-link"></i> URL
+                            </label>
+                            <label class="upload-tab" for="fileTab">
+                                <i class="fas fa-upload"></i> Upload
+                            </label>
+                        </div>
+                        <div class="upload-content" id="urlTab">
+                            <input type="url" id="imageUrl" placeholder="https://example.com/movie-poster.jpg">
+                            <small style="color: var(--text-muted); font-size: 0.8rem;">Paste an image URL from the web</small>
+                        </div>
+                        <div class="upload-content" id="fileTab" style="display: none;">
+                            <div class="file-upload-area" id="fileUploadArea">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Click or drag an image here</p>
+                                <small>JPG, PNG, GIF, WebP (Max 5MB)</small>
+                            </div>
+                            <input type="file" id="imageFile" accept="image/*" style="display: none;">
+                        </div>
+                    </div>
+                    <div class="image-preview" id="imagePreview" style="display: none;">
+                        <img id="previewImg" src="" alt="Preview">
+                        <button type="button" class="remove-image" id="removeImage">
+                            <i class="fas fa-times"></i> Remove
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Rating *</label>
+                    <div class="star-rating" id="starRating">
+                        <i class="fas fa-star" data-rating="1"></i>
+                        <i class="fas fa-star" data-rating="2"></i>
+                        <i class="fas fa-star" data-rating="3"></i>
+                        <i class="fas fa-star" data-rating="4"></i>
+                        <i class="fas fa-star" data-rating="5"></i>
+                        <i class="fas fa-star" data-rating="6"></i>
+                        <i class="fas fa-star" data-rating="7"></i>
+                        <i class="fas fa-star" data-rating="8"></i>
+                        <i class="fas fa-star" data-rating="9"></i>
+                        <i class="fas fa-star" data-rating="10"></i>
+                    </div>
+                    <span class="rating-text" id="ratingText">0 / 10</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewerName">Your Name *</label>
+                    <input type="text" id="reviewerName" required placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewText">Your Review *</label>
+                    <textarea id="reviewText" required placeholder="Share your thoughts about this title..." rows="5"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Submit Review
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Reviews Display Section -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <div class="reviews-header">
+                <h2 class="section-title">Community Reviews</h2>
+                <div class="sort-options">
+                    <label for="sortBy">Sort by:</label>
+                    <select id="sortBy">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="highest">Highest Rated</option>
+                        <option value="lowest">Lowest Rated</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="filter-info" id="filterInfo" style="display: none;">
+                <span id="filterText"></span>
+                <button class="clear-filter" id="clearFilter">
+                    <i class="fas fa-times"></i> Clear
+                </button>
+            </div>
+
+            <div class="reviews-grid" id="reviewsContainer">
+                <!-- Reviews will be dynamically inserted here -->
+            </div>
+
+            <div class="no-reviews" id="noReviews">
+                <i class="fas fa-comment-slash"></i>
+                <p>No reviews yet. Be the first to write one!</p>
+            </div>
+
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-search"></i>
+                <p>No reviews found matching your search.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-film"></i> CineReview</h3>
+                    <p>Your platform to rate and review movies, anime, manga, cartoons and more!</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#add-review">Add Review</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#" data-category="movie">Movies</a></li>
+                        <li><a href="#" data-category="anime">Anime</a></li>
+                        <li><a href="#" data-category="manga">Manga</a></li>
+                        <li><a href="#" data-category="cartoon">Cartoons</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CineReview. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
